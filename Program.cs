@@ -14,14 +14,14 @@ namespace CubeUpdater
         {
             Console.WriteLine(text);
         }
-        public static void Main(string[] args)
+        public static void Main()
         {
             Write("Hola bienvenido a cubitos descargador!!!!\nCargando...");
             try
             {
                 client = new GitHubClient(new ProductHeaderValue("CubeUpdater"))
                 {
-                    Credentials = new Credentials("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")
+                    Credentials = new Credentials("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")
                 };
             }
             catch (Exception e)
