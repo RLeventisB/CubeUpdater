@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -184,12 +184,6 @@ namespace Octokit.Internal
                     }
                 }
 
-                if (type == typeof(ActivityPayload))
-                {
-                    var payloadType = GetPayloadType(_type);
-                    return base.DeserializeObject(value, payloadType);
-                }
-
                 if (ReflectionUtils.IsStringEnumWrapper(type))
                 {
                     // this check is a workaround for https://github.com/octokit/octokit.net/issues/2052
@@ -212,44 +206,6 @@ namespace Octokit.Internal
                     .ToDictionary(
                         p => p.JsonFieldName,
                         p => new KeyValuePair<Type, ReflectionUtils.SetDelegate>(p.Type, p.SetDelegate));
-            }
-
-            private static Type GetPayloadType(string activityType)
-            {
-                switch (activityType)
-                {
-                    case "CheckRunEvent":
-                        return typeof(CheckRunEventPayload);
-                    case "CheckSuiteEvent":
-                        return typeof(CheckSuiteEventPayload);
-                    case "CommitCommentEvent":
-                        return typeof(CommitCommentPayload);
-                    case "CreateEvent":
-                        return typeof(CreateEventPayload);
-                    case "DeleteEvent":
-                        return typeof(DeleteEventPayload);
-                    case "ForkEvent":
-                        return typeof(ForkEventPayload);
-                    case "IssueCommentEvent":
-                        return typeof(IssueCommentPayload);
-                    case "IssuesEvent":
-                        return typeof(IssueEventPayload);
-                    case "PullRequestEvent":
-                        return typeof(PullRequestEventPayload);
-                    case "PullRequestReviewEvent":
-                        return typeof(PullRequestReviewEventPayload);
-                    case "PullRequestReviewCommentEvent":
-                        return typeof(PullRequestCommentPayload);
-                    case "PushEvent":
-                        return typeof(PushEventPayload);
-                    case "ReleaseEvent":
-                        return typeof(ReleaseEventPayload);
-                    case "StatusEvent":
-                        return typeof(StatusEventPayload);
-                    case "WatchEvent":
-                        return typeof(StarredEventPayload);
-                }
-                return typeof(ActivityPayload);
             }
         }
     }
