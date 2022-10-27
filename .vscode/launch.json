@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "enableStepFiltering": false,
+            "requireExactSource": true,
+            "program": "${workspaceFolder}/bin/Debug/net6.0/win-x64/CubeUpdater.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Publish",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "publish",
+            "program": "${workspaceFolder}/bin/Release/net6.0/win-x64/publish/CubeUpdater.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Publish (32-bits)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "publish32",
+            "program": "${workspaceFolder}/bin/Release/net6.0/win-x86/publish/CubeUpdater.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": true
+        }
+    ]
+}

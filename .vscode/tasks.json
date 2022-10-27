@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CubeUpdater.csproj",
+                "/consoleloggerparameters:NoSummary",
+                "/clp:NoSummary",
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "dependsOn": "clean",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                {
+                    "value": "-c Release",
+                    "quoting": "weak"
+                },
+                "/p:Mode=CoreRT-ReflectionFree",
+                "/clp:NoSummary",
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish32",
+            "dependsOn": "clean",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                {
+                    "value": "-c Release",
+                    "quoting": "weak"
+                },
+                "/p:RuntimeIdentifier=win-x86",
+                "/p:Mode=CoreRT-ReflectionFree",
+                "/clp:NoSummary",
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean",
+            "command": "dotnet",
+            "args": [
+                "clean"
+            ],
+        }
+    ]
+}
