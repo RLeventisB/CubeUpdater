@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace Octokit
 {
@@ -87,28 +87,6 @@ namespace Octokit
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
             return connection.Get<T>(uri, null, null, cancellationToken);
-        }
-
-        /// <summary>
-        /// Returns true if the API call represents a true response, or false if it represents a false response.
-        /// Throws an exception if the HTTP status does not match either a true or false response.
-        /// </summary>
-        /// <remarks>
-        /// Some API endpoints return a 204 for "true" and 404 for false. See https://developer.github.com/v3/activity/starring/#check-if-you-are-starring-a-repository
-        /// for one example. This encapsulates that logic.
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown if the status is neither 204 nor 404</exception>
-        /// <param name="response">True for a 204 response, False for a 404</param>
-        /// <returns></returns>
-        public static bool IsTrue(this IResponse response)
-        {
-            Ensure.ArgumentNotNull(response, nameof(response));
-
-            if (response.StatusCode != HttpStatusCode.NotFound && response.StatusCode != HttpStatusCode.NoContent)
-            {
-                throw new ApiException("Invalid Status Code returned. Expected a 204 or a 404", response.StatusCode);
-            }
-            return response.StatusCode == HttpStatusCode.NoContent;
         }
     }
 }

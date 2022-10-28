@@ -142,10 +142,7 @@ namespace Octokit.Internal
             // Overridden to handle enums.
             public override object DeserializeObject(object value, Type type)
             {
-                var stringValue = value as string;
-                var jsonValue = value as JsonObject;
-
-                if (stringValue != null)
+                if (value is string stringValue)
                 {
                     // If it's a nullable type, use the underlying type
                     if (ReflectionUtils.IsNullableType(type))
@@ -174,13 +171,6 @@ namespace Octokit.Internal
                     if (ReflectionUtils.IsStringEnumWrapper(type))
                     {
                         return Activator.CreateInstance(type, stringValue);
-                    }
-                }
-                else if (jsonValue != null)
-                {
-                    if (type == typeof(Activity))
-                    {
-                        _type = jsonValue["type"].ToString();
                     }
                 }
 

@@ -109,8 +109,7 @@ namespace Octokit
                     return delegate (object source)
                     {
                         var value = getDelegate(source);
-                        var stringValue = value as string;
-                        return stringValue == null ? value : stringValue.ToBase64String();
+                        return value is not string stringValue ? value : stringValue.ToBase64String();
                     };
                 }
 

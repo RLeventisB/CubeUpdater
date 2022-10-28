@@ -59,7 +59,7 @@ namespace Octokit
                     {
                         expansion += string.IsNullOrWhiteSpace(expansion) ? "?" : "&";
                         expansion += parameter + "=" +
-                            Uri.EscapeDataString("" + parameterProperty.GetValue(values, new object[0]));
+                            Uri.EscapeDataString("" + parameterProperty.GetValue(values, Array.Empty<object>()));
                     }
                 }
                 template = _optionalQueryStringRegex.Replace(template, expansion);
